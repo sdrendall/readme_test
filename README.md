@@ -1,9 +1,9 @@
 # NLP-API
 1. [Installation](#installation)
 2. [Endpoints](#endpoints)	
-	- [`/faq/v1`](#/faq/v1)
-	- [`/faq`](#/faq)
-	- [`/admin`](#/admin)
+	- [`/faq/v1`](#faqv1)
+	- [`/faq`](#faq)
+	- [`/admin`](#admin)
 	- [`/batch`](#batch) 
 3. [Author's Note](#authors-note)
 
