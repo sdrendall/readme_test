@@ -2,7 +2,7 @@
 
 1. [Installation](#installation)
 2. [Endpoints](#endpoints)
-	- [General Output Format](#general-output-format)
+	- [Offers](#offers)
 	- [Companies](#companies)
 	- [Applications](#applications)
 	- [Applicant](#applicant)
@@ -27,10 +27,7 @@ npm run test
 ```
 
 ## Endpoints
-All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~
-
-### General Output Format
-All endpoints return JSON in the following form:
+All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~ Each endpoint returns JSON of the following form:
 
 ```graphql
 {
