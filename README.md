@@ -2,6 +2,11 @@
 
 1. [Installation](#installation)
 2. [Endpoints](#endpoints)
+	- [General Output Format](#general-output-format)
+	- [Companies](#companies)
+	- [Applications](#applications)
+	- [Applicant](#applicant)
+	- [Utils](#utils)
 
 ## Installation:
 Make sure you have installed the general dev dependencies TODO LINK
@@ -24,23 +29,32 @@ npm run test
 ##Endpoints
 All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~
 
-### Utils
+### General Output Format
+All endpoints return JSON in the following form:
 
--  `/v1/ping` 
-GET - Used to check the app's live status
+```graphql
+{
+	status: {
+		value: StatusCode
+		message: String
+	} 
+	response: Data || ""
+  	links: ?{
+		next: URL
+	}
+}
+```
 
-- `/v1/unauthorized` 
-GET - Unauthorized request endpoint
-
-- `/v1/memory`
-GET - ????
+The format of the response field is specific to individual endpoints, and can be found with their corresponding documentation.
 
 ### Offers
 
-#### `/v1/offers`
-**GET** :: Retrieves the offers for the user's group_id
+API endpoint corresponding to job offers
 
-Output format - JSON:
+#### `/v1/offers`
+**GET** :: Retrieves all offers corresponding to the user's `group_id`
+
+Response format:
     
 ```graphql
 {
@@ -50,21 +64,288 @@ Output format - JSON:
 }
 ```
 
-- `/v1/offers/{offer_id}`
-- `/v1/offers/suggestions/cities`
-- `/v1/offers/suggestions/categories`
-- `/v1/offers/suggestions/levels`
-- `/v1/offers/options`
-- `/v1/offers/external_for_company`
-- `/v1/disabled`
-- `/v1/disable/{offer_id}`
-- `/v1/enable/{offer_id}`
-- `/v1/elastic/single/{offer_id}`
-- `/v1/elastic/syncall`
-- `/v1/elastic/search`
-- `/v1/fboffers`
-- `/v1/offersuggestions`
-- `/v1/offercategorysuggestions`
+#### `/v1/offers/{offer_id}`
+
+**GET** :: Retrieves the offers matching the specified `offer_id`
+
+Response Format:
+
+(response is an array, NOT an object)
+
+```graphql
+[Offer]
+```
+
+Error modes:
+
+`formatNotallowed`:
+    - invalid `offer_id`
+
+**POST** :: Retrieves the offers for the user's `group_id`
+
+Request Body Format:
+
+```graphql
+{
+	offer: {
+	    level
+	    category
+	    title
+	    city
+	    division
+	    unit
+	    type
+	    country
+	    description
+	    link
+	    questions
+	}
+}
+```
+
+Response Format:
+
+```graphql
+{
+    offer: Offer
+}
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Invalid question format
+    - Unhandled user model error
+    - Unhandled offer model error
+
+
+#### `/v1/offers/suggestions/cities`
+    
+**GET** :: Retrieves a list of names of cities containing the most job offers
+
+Response Format:
+
+    XXX - returns an array called `top_city_names` generated with cities.map(x => x._id)
+
+```graphql
+[String]
+```
+
+
+#### `/v1/offers/suggestions/categories`
+
+**GET** :: Retrieves a list of names of categories containing the most job offers
+
+Response Format:
+
+    XXX - returns an array called `top_category_names` generated with categories.map(x => x._id)
+
+```graphql
+[String]
+```
+
+#### `/v1/offers/suggestions/levels`
+
+**GET** :: Retrieves a list of names of position levels containing the most job offers
+
+Response Format:
+
+    XXX - returns an array called `top_level_names` generated with levels.map(x => x._id)
+
+```graphql
+[String]
+```
+
+
+#### `/v1/offers/options`
+
+**GET** :: Retrieves the aggregated metadata for all offers in available to a user
+
+Response Format:
+
+```graphql
+{
+    cities: [{
+        name: String
+        country: String
+    }]
+    levels: [
+        {name: 'Internship'}
+        {name: 'Entry Level'}
+        {name: 'Mid Level'}
+        {name: 'Senior Level'}
+    ]
+    categories: [
+        {name: String}
+    ]
+    skills: [SkillTag]
+}
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Unhandled offer model error
+
+
+#### `/v1/offers/external_for_company`
+
+DEPRECATED
+
+#### `/v1/offers/disabled`
+
+**GET** :: Retrieves the offers that the user has disabled
+
+Response Format:
+
+```graphql
+{
+    total_active: Int
+    total_disabled: Int
+    offers: [Offer]
+}
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Unhandled user model error
+    - Unhandled offer model error
+
+
+#### `/v1/disable/{offer_id}`
+
+**GET** :: Disables the offer specified by `offer_id`
+
+Response Format:
+
+```graphql
+{
+    total_active: Int
+    total_disabled: Int
+    offers: [Offer]
+}
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Unhandled user model error
+    - Unhandled offer model error
+
+
+#### `/v1/enable/{offer_id}`
+
+**GET** :: Enables the offer specified by `offer_id`
+
+Response Format:
+
+```graphql
+{
+    total_active: Int
+    total_disabled: Int
+    offers: [Offer]
+}
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Unhandled user model error
+    - Unhandled offer model error
+
+
+#### `/v1/elastic/single/{offer_id}`
+
+**POST** :: Uploads an offer to elastic search
+
+Request Body Format:
+
+Offer is resolved from the `offer_id` provided in the url
+
+```graphql
+{}
+```
+
+Response Format:
+```graphql
+[ElasticSearchResponse]
+```
+
+Error Modes:
+
+`formatNotallowed`:
+    - Unhandled offer model error
+
+
+#### `/v1/elastic/syncall`
+
+**POST** :: Performs a full resync for elasticsearch
+
+Request Body Format:
+
+```graphql
+{}
+```
+
+Response Format:
+```graphql
+[]
+```
+
+Error Modes:
+
+`ko_status`:
+    - Error on fullResync
+
+
+#### `/v1/elastic/search`
+
+**GET** :: Gets a list of offer search results
+
+Response Format:
+```graphql
+[OfferID]
+```
+
+
+#### `/v1/fboffers`
+
+XXX - not sure what this does
+
+
+#### `/v1/offersuggestions`
+
+**GET** :: Retrieves cities containing the most offers and the offer categories found in those cities
+
+XXX - not sure how this differs from offercategorysuggestions
+
+Response Format:
+```graphql
+[
+    {
+        city: City
+        categories: [String]
+    }
+]
+```
+
+#### `/v1/offercategorysuggestions`
+
+**GET** :: Similar to offersuggestions
+
+XXX ask Andriy for difference
+
+Response Format:
+```graphql
+[
+    {
+        city: City
+        categories: [String]
+    }
+]
+```
+
 
 ### Companies
 - `/v1/companies`
@@ -86,78 +367,14 @@ Output format - JSON:
 - `/applications/replied`
 - `/application/offer/{offer_id}`
 - `/application/reply/{application_id}`
-- ``
 
+### Utils
 
-### Applicant
+####  `/v1/ping` 
+**GET** :: Used to check the app's live status
 
-* POST `/v1/login` - Login for the Applicant
-    * Parameters:
-        * `applicant[email] (required)`
-        * `password (required)`
+#### `/v1/unauthorized` 
+**GET** :: Unauthorized request endpoint
 
-* GET `/v1/me/:token` - Returning the Applicant by token
-
-* GET `/v1/me` - Returning the Applicant
-
-* PUT `/v1/me` - Updating the Applicant data
-    * Headers:
-        * `Content-Type: application/x-www-form-urlencoded (required)`
-        * `x-three-user-token (required)`
-
-    * Parameters:
-        * `applicant[first_name]`
-        * `applicant[email]`
-        * `applicant[password]`
-        * `applicant[image] (Request File)`
-        * `applicant[a1]`
-        * `applicant[a1_link]`
-        * `applicant[a2]`
-        * `applicant[a2_link]`
-        * `applicant[a3]`
-        * `applicant[a3_link]`
-
-* POST `/v1/me` - Creating the Applicant data
-    * Parameters:
-        * `applicant[first_name]`
-        * `applicant[email]`
-        * `applicant[password]`
-
-* POST `/v1/me/reset/:token` - Resets the Applicant password
-    * Parameters:
-        * `password (required)`
-
-* POST `/v1/forgot` - Sends the password reset link via mail to the Applicant
-    * Parameters:
-        * `applicant[email] (required)`
-
-* POST `/v1/me/approver/:achievement` - Creates an Achievement (a1, a2, a3) approoval request
-    * Parameters:
-        * `approver - name (required)`
-        * `approver - position (required)`
-        * `approver - email (required)`
-
-    * Creating an unverified aprovement request and sending a mail to the approver
-
-### Company
-
-* POST `/v1/users/login` - Company Login endpoint
-    * Parameters:
-        * `user[username] (required)`
-        * `user[password] (required)`
-
-* GET `/v1/users/me` - Returning the Company User data
-    * Headers:
-        * `x-three-dash-user-token (required)`
-
-* GET `/v1/users/company` - Returning the Company data
-    * Headers:
-        * `x-three-dash-user-token (required)`
-
-* GET `/v1/users/applications/new` - Returning the Company new applications
-    * Headers:
-        * `x-three-dash-user-token (required)`
-
-* GET `/v1/users/applications/replied` - Returning the Company replied applications
-    * Headers:
-        * `x-three-dash-user-token (required)`
+#### `/v1/memory`
+**GET** :: ????
