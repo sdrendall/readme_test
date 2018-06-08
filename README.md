@@ -1,69 +1,160 @@
-# NLP-API
+# PAL API module
+
 1. [Installation](#installation)
-2. [Endpoints](#endpoints)	
-	- [`/faq/v1`](#faqv1)
-	- [`/faq`](#faq)
-	- [`/admin`](#admin)
-	- [`/batch`](#batch) 
-3. [Author's Note](#authors-note)
+2. [Endpoints](#endpoints)
 
-## Installation 
 
-To install, first clone the latest version of the repo from github:
+## Installation:
+Make sure you have installed the general dev dependencies TODO LINK
+
+Then, clone the repo:
 ```
-git clone git@github:jobpal/nlp-api
+git clone git@github.com:jobpal/pal-api
 ```
 
-Next, install spacy and the accompanying language models. Be aware that these models are several gigabytes in size so this step may take some time.
-```
-pip install spacy==2.0.7
-python -m spacy download en_core_web_lg
-python -m spacy link en_core_web_lg en --force
-pip install https://s3.eu-central-1.amazonaws.com/spacy-int/de_core_fasttext_lg-2.0.0.tar.gz
-python -m spacy link de_core_fasttext_lg de --force
+Next, install the node dependencies, (note, we have encountered issues when using `yarn` here): ```
+npm install
 ```
 
-Finally, install the dependencies listed in `requirements.txt`:
+And run our tests to ensure your build worked:
 ```
-pip install -r requirements.txt
+npm run test
 ```
 
-## Endpoints
+##Endpoints
+All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~
 
-### `/faq/v1`
-- `models`
-- `models/{model_id}`
-- `models/{model_id}/categories`
-- `models/{model_id}/categories/{category_id}`
-- `models/{model_id}/contexts`
-- `models/{model_id}/answers`
-- `models/{model_id}/queries`
-- `models/{model_id}/questions`
-- `models/{model_id}/questions/{question_id}`
-- `models/{model_id}/entities`
-- `models/{model_id}/entity_types/{entity_type_id}/entities`
-- `models/{model_id}/queries/{query_id}`
-- `models/{model_id}/analytics/eval`
-- `models/{model_id}/analytics/stats`
-- `models/{model_id}/analytics/problems`
-- `version`
-- `entity_types`
-- `entity_types/{entity_type_id}`
+### Utils
+
+-  `/v1/ping` 
+GET - Used to check the app's live status
+
+- `/v1/unauthorized` 
+GET - Unauthorized request endpoint
+
+- `/v1/memory`
+GET - ????
+
+### Offers
+- `/v1/offers`
+GET - Retrieves the offers for the user's group_id
+    Output format - JSON:
+    ```graphql
+{
+    total_active: INT
+    total_disabled: INT
+    offers: [Offer]
+}
+    ```
+
+- `/v1/offers/{offer_id}`
+- `/v1/offers/suggestions/cities`
+- `/v1/offers/suggestions/categories`
+- `/v1/offers/suggestions/levels`
+- `/v1/offers/options`
+- `/v1/offers/external_for_company`
+- `/v1/disabled`
+- `/v1/disable/{offer_id}`
+- `/v1/enable/{offer_id}`
+- `/v1/elastic/single/{offer_id}`
+- `/v1/elastic/syncall`
+- `/v1/elastic/search`
+- `/v1/fboffers`
+- `/v1/offersuggestions`
+- `/v1/offercategorysuggestions`
+
+### Companies
+- `/v1/companies`
+- `/v1/companies/{group_id}`
+- `/v1/companies/{group_id}/invite-users`
+- `/v1/company/{group_id}/applications`
+- `/v1/company/{company_id}/offers`
+- `/v1/company/{group_id}/offers`
+- `/v1/company/{company_id}`
+- `/v1/company/{company_id}/{offer_id}`
+- `/v1/company/{group_id}`
+- `/v1/company/{company_id}/email`
+- `/v1/company/{company_id}/faqnotificationemail`
+
+### Applications
+- `/{offer_id}/applications/new`
+- `/applications/new`
+- `/{offer_id}/applications/replied`
+- `/applications/replied`
+- `/application/offer/{offer_id}`
+- `/application/reply/{application_id}`
+- ``
 
 
-### `/faq`
-- `model`
-- `classify`
-- `classify_many`
-- `webhook`
+### Applicant
 
-### `/admin`
+* POST `/v1/login` - Login for the Applicant
+    * Parameters:
+        * `applicant[email] (required)`
+        * `password (required)`
 
-Django builtin admin dashboard
+* GET `/v1/me/:token` - Returning the Applicant by token
 
-### `/batch`
+* GET `/v1/me` - Returning the Applicant
 
-what's this?
+* PUT `/v1/me` - Updating the Applicant data
+    * Headers:
+        * `Content-Type: application/x-www-form-urlencoded (required)`
+        * `x-three-user-token (required)`
 
-## Author's Note
-Quite good
+    * Parameters:
+        * `applicant[first_name]`
+        * `applicant[email]`
+        * `applicant[password]`
+        * `applicant[image] (Request File)`
+        * `applicant[a1]`
+        * `applicant[a1_link]`
+        * `applicant[a2]`
+        * `applicant[a2_link]`
+        * `applicant[a3]`
+        * `applicant[a3_link]`
+
+* POST `/v1/me` - Creating the Applicant data
+    * Parameters:
+        * `applicant[first_name]`
+        * `applicant[email]`
+        * `applicant[password]`
+
+* POST `/v1/me/reset/:token` - Resets the Applicant password
+    * Parameters:
+        * `password (required)`
+
+* POST `/v1/forgot` - Sends the password reset link via mail to the Applicant
+    * Parameters:
+        * `applicant[email] (required)`
+
+* POST `/v1/me/approver/:achievement` - Creates an Achievement (a1, a2, a3) approoval request
+    * Parameters:
+        * `approver - name (required)`
+        * `approver - position (required)`
+        * `approver - email (required)`
+
+    * Creating an unverified aprovement request and sending a mail to the approver
+
+### Company
+
+* POST `/v1/users/login` - Company Login endpoint
+    * Parameters:
+        * `user[username] (required)`
+        * `user[password] (required)`
+
+* GET `/v1/users/me` - Returning the Company User data
+    * Headers:
+        * `x-three-dash-user-token (required)`
+
+* GET `/v1/users/company` - Returning the Company data
+    * Headers:
+        * `x-three-dash-user-token (required)`
+
+* GET `/v1/users/applications/new` - Returning the Company new applications
+    * Headers:
+        * `x-three-dash-user-token (required)`
+
+* GET `/v1/users/applications/replied` - Returning the Company replied applications
+    * Headers:
+        * `x-three-dash-user-token (required)`
