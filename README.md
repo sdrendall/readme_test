@@ -424,7 +424,7 @@ Endpoints for company data
 ### Template
 
 Here is a template to use for new endpoints:
-```
+```markdown
 
 ---
 #### `/some/endpoint/url`
@@ -432,7 +432,7 @@ Here is a template to use for new endpoints:
 **GET** :: <brief description of behavior>
 
 ##### Response Format:
-\```graphql
+```graphql
 {
 
 }
@@ -449,12 +449,12 @@ Here is a template to use for new endpoints:
 
 ##### Request Body Format:
 
-\```graphql
+```graphql
 {}
 \```
 
 ##### Response Format:
-\```graphql
+```graphql
 {}
 \```
 
