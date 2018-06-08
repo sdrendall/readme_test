@@ -38,7 +38,7 @@ GET - ????
 ### Offers
 
 #### `/v1/offers`
-GET - Retrieves the offers for the user's group_id
+**GET** :: Retrieves the offers for the user's group_id
 
 Output format - JSON:
     
