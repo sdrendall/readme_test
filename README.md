@@ -426,43 +426,43 @@ Endpoints for company data
 Here is a template to use for new endpoints:
 ```markdown
 
----
-#### `/some/endpoint/url`
+    ---
+    #### `/some/endpoint/url`
 
-**GET** :: <brief description of behavior>
+    **GET** :: <brief description of behavior>
 
-##### Response Format:
-```graphql
-{
+    ##### Response Format:
+    ```graphql
+    {
 
-}
-\```
+    }
+    ```
 
-##### Error Modes:
+    ##### Error Modes:
 
-`formatNotallowed`:
+    `formatNotallowed`:
 
-- Error Mode 1
-- Error Mode 2
+    - Error Mode 1
+    - Error Mode 2
 
-**POST** :: Performs a full resync for elasticsearch
+    **POST** :: Performs a full resync for elasticsearch
 
-##### Request Body Format:
+    ##### Request Body Format:
 
-```graphql
-{}
-\```
+    ```graphql
+    {}
+    ```
 
-##### Response Format:
-```graphql
-{}
-\```
+    ##### Response Format:
+    ```graphql
+    {}
+    ```
 
-##### Error Modes:
+    ##### Error Modes:
 
-`ko_status`:
+    `ko_status`:
 
-- Error Mode 1
-- Error Mode 2
+    - Error Mode 1
+    - Error Mode 2
 
 ```
