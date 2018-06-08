@@ -3,7 +3,6 @@
 1. [Installation](#installation)
 2. [Endpoints](#endpoints)
 
-
 ## Installation:
 Make sure you have installed the general dev dependencies TODO LINK
 
@@ -12,7 +11,8 @@ Then, clone the repo:
 git clone git@github.com:jobpal/pal-api
 ```
 
-Next, install the node dependencies, (note, we have encountered issues when using `yarn` here): ```
+Next, install the node dependencies, (note, we have encountered issues when using `yarn` here): 
+```
 npm install
 ```
 
@@ -36,16 +36,19 @@ GET - Unauthorized request endpoint
 GET - ????
 
 ### Offers
-- `/v1/offers`
+
+#### `/v1/offers`
 GET - Retrieves the offers for the user's group_id
-    Output format - JSON:
-    ```graphql
+
+Output format - JSON:
+    
+```graphql
 {
-    total_active: INT
-    total_disabled: INT
+    total_active: Int
+    total_disabled: Int
     offers: [Offer]
 }
-    ```
+```
 
 - `/v1/offers/{offer_id}`
 - `/v1/offers/suggestions/cities`
