@@ -81,7 +81,7 @@ API endpoint corresponding to job offers
 
 `formatNotallowed`:
 
-    - invalid `offer_id`
+- invalid `offer_id`
 
 **POST** :: Retrieves the offers for the user's `group_id`
 
