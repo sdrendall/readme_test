@@ -65,7 +65,6 @@ API endpoint corresponding to job offers
 ```
 
 ---
-
 #### `/v1/offers/{offer_id}`
 
 **GET** :: Retrieves the offers matching the specified `offer_id`
@@ -85,7 +84,7 @@ API endpoint corresponding to job offers
 
 **POST** :: Retrieves the offers for the user's `group_id`
 
-Request Body Format:
+##### Request Body Format:
 
 ```graphql
 {
@@ -113,7 +112,7 @@ Response Format:
 }
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Invalid question format
@@ -121,6 +120,7 @@ Error Modes:
     - Unhandled offer model error
 
 
+---
 #### `/v1/offers/suggestions/cities`
     
 **GET** :: Retrieves a list of names of cities containing the most job offers
@@ -134,11 +134,12 @@ XXX - returns an array called `top_city_names` generated with cities.map(x => x.
 ```
 
 
+---
 #### `/v1/offers/suggestions/categories`
 
 **GET** :: Retrieves a list of names of categories containing the most job offers
 
-Response Format:
+##### Response Format:
 
     XXX - returns an array called `top_category_names` generated with categories.map(x => x._id)
 
@@ -146,11 +147,13 @@ Response Format:
 [String]
 ```
 
+
+---
 #### `/v1/offers/suggestions/levels`
 
 **GET** :: Retrieves a list of names of position levels containing the most job offers
 
-Response Format:
+##### Response Format:
 
     XXX - returns an array called `top_level_names` generated with levels.map(x => x._id)
 
@@ -159,11 +162,12 @@ Response Format:
 ```
 
 
+---
 #### `/v1/offers/options`
 
 **GET** :: Retrieves the aggregated metadata for all offers in available to a user
 
-Response Format:
+##### Response Format:
 
 ```graphql
 {
@@ -184,21 +188,24 @@ Response Format:
 }
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Unhandled offer model error
 
 
+---
 #### `/v1/offers/external_for_company`
 
 DEPRECATED
 
+
+---
 #### `/v1/offers/disabled`
 
 **GET** :: Retrieves the offers that the user has disabled
 
-Response Format:
+##### Response Format:
 
 ```graphql
 {
@@ -208,18 +215,19 @@ Response Format:
 }
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Unhandled user model error
     - Unhandled offer model error
 
 
+---
 #### `/v1/disable/{offer_id}`
 
 **GET** :: Disables the offer specified by `offer_id`
 
-Response Format:
+##### Response Format:
 
 ```graphql
 {
@@ -229,18 +237,19 @@ Response Format:
 }
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Unhandled user model error
     - Unhandled offer model error
 
 
+---
 #### `/v1/enable/{offer_id}`
 
 **GET** :: Enables the offer specified by `offer_id`
 
-Response Format:
+##### Response Format:
 
 ```graphql
 {
@@ -250,18 +259,19 @@ Response Format:
 }
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Unhandled user model error
     - Unhandled offer model error
 
 
+---
 #### `/v1/elastic/single/{offer_id}`
 
 **POST** :: Uploads an offer to elastic search
 
-Request Body Format:
+##### Request Body Format:
 
 Offer is resolved from the `offer_id` provided in the url
 
@@ -269,60 +279,64 @@ Offer is resolved from the `offer_id` provided in the url
 {}
 ```
 
-Response Format:
+##### Response Format:
 ```graphql
 [ElasticSearchResponse]
 ```
 
-Error Modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - Unhandled offer model error
 
 
+---
 #### `/v1/elastic/syncall`
 
 **POST** :: Performs a full resync for elasticsearch
 
-Request Body Format:
+##### Request Body Format:
 
 ```graphql
 {}
 ```
 
-Response Format:
+##### Response Format:
 ```graphql
 []
 ```
 
-Error Modes:
+##### Error Modes:
 
 `ko_status`:
     - Error on fullResync
 
 
+---
 #### `/v1/elastic/search`
 
 **GET** :: Gets a list of offer search results
 
-Response Format:
+##### Response Format:
 ```graphql
 [OfferID]
 ```
 
 
+---
 #### `/v1/fboffers`
 
 XXX - not sure what this does
 
 
+---
 #### `/v1/offersuggestions`
 
 **GET** :: Retrieves cities containing the most offers and the offer categories found in those cities
 
 XXX - not sure how this differs from offercategorysuggestions
 
-Response Format:
+##### Response Format:
 ```graphql
 [
     {
@@ -332,13 +346,15 @@ Response Format:
 ]
 ```
 
+
+---
 #### `/v1/offercategorysuggestions`
 
 **GET** :: Similar to offersuggestions
 
 XXX ask Andriy for difference
 
-Response Format:
+##### Response Format:
 ```graphql
 [
     {
