@@ -117,9 +117,9 @@ Response Format:
 
 `formatNotallowed`:
 
-    - Invalid question format
-    - Unhandled user model error
-    - Unhandled offer model error
+- Invalid question format
+- Unhandled user model error
+- Unhandled offer model error
 
 
 ---
@@ -194,7 +194,7 @@ XXX - returns an array called `top_city_names` generated with cities.map(x => x.
 
 `formatNotallowed`:
 
-    - Unhandled offer model error
+- Unhandled offer model error
 
 
 ---
@@ -222,8 +222,8 @@ DEPRECATED
 
 `formatNotallowed`:
 
-    - Unhandled user model error
-    - Unhandled offer model error
+- Unhandled user model error
+- Unhandled offer model error
 
 
 ---
@@ -245,8 +245,8 @@ DEPRECATED
 
 `formatNotallowed`:
 
-    - Unhandled user model error
-    - Unhandled offer model error
+- Unhandled user model error
+- Unhandled offer model error
 
 
 ---
@@ -268,8 +268,8 @@ DEPRECATED
 
 `formatNotallowed`:
 
-    - Unhandled user model error
-    - Unhandled offer model error
+- Unhandled user model error
+- Unhandled offer model error
 
 
 ---
@@ -294,7 +294,7 @@ Offer is resolved from the `offer_id` provided in the url
 
 `formatNotallowed`:
 
-    - Unhandled offer model error
+- Unhandled offer model error
 
 
 ---
@@ -317,7 +317,7 @@ Offer is resolved from the `offer_id` provided in the url
 
 `ko_status`:
 
-    - Error on fullResync
+- Error on fullResync
 
 
 ---
