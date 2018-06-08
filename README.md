@@ -5,7 +5,6 @@
 	- [Offers](#offers)
 	- [Companies](#companies)
 	- [Applications](#applications)
-	- [Applicant](#applicant)
 	- [Utils](#utils)
 
 ## Installation:
@@ -375,7 +374,17 @@ XXX ask Andriy for difference
 ---
 ---
 ### Companies
-- `/v1/companies`
+
+Endpoints for company data
+
+---
+#### `/v1/companies`
+
+**GET** :: 
+
+**POST** ::
+
+
 - `/v1/companies/{group_id}`
 - `/v1/companies/{group_id}/invite-users`
 - `/v1/company/{group_id}/applications`
@@ -409,3 +418,51 @@ XXX ask Andriy for difference
 
 #### `/v1/memory`
 **GET** :: ????
+
+## Updating to the docs
+
+### Template
+
+Here is a template to use for new endpoints:
+```
+
+---
+#### `/some/endpoint/url`
+
+**GET** :: <brief description of behavior>
+
+##### Response Format:
+\```graphql
+{
+
+}
+\```
+
+##### Error Modes:
+
+`formatNotallowed`:
+
+- Error Mode 1
+- Error Mode 2
+
+**POST** :: Performs a full resync for elasticsearch
+
+##### Request Body Format:
+
+\```graphql
+{}
+\```
+
+##### Response Format:
+\```graphql
+{}
+\```
+
+##### Error Modes:
+
+`ko_status`:
+
+- Error Mode 1
+- Error Mode 2
+
+```
