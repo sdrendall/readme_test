@@ -26,7 +26,7 @@ And run our tests to ensure your build worked:
 npm run test
 ```
 
-##Endpoints
+## Endpoints
 All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~
 
 ### General Output Format
@@ -54,7 +54,7 @@ API endpoint corresponding to job offers
 #### `/v1/offers`
 **GET** :: Retrieves all offers corresponding to the user's `group_id`
 
-Response format:
+##### Response format:
     
 ```graphql
 {
@@ -64,11 +64,13 @@ Response format:
 }
 ```
 
+---
+
 #### `/v1/offers/{offer_id}`
 
 **GET** :: Retrieves the offers matching the specified `offer_id`
 
-Response Format:
+##### Response Format:
 
 (response is an array, NOT an object)
 
@@ -76,7 +78,7 @@ Response Format:
 [Offer]
 ```
 
-Error modes:
+##### Error Modes:
 
 `formatNotallowed`:
     - invalid `offer_id`
@@ -123,9 +125,9 @@ Error Modes:
     
 **GET** :: Retrieves a list of names of cities containing the most job offers
 
-Response Format:
+##### Response Format:
 
-    XXX - returns an array called `top_city_names` generated with cities.map(x => x._id)
+XXX - returns an array called `top_city_names` generated with cities.map(x => x._id)
 
 ```graphql
 [String]
