@@ -27,7 +27,7 @@ npm run test
 ```
 
 ## Endpoints
-All the endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~ Each endpoint returns JSON of the following form:
+All endpoints (except Utils), are single token protected, ~~the token is retrievable from the `/v1/login` endpoint~~. Each endpoint returns JSON of the following form:
 
 ```graphql
 {
@@ -44,10 +44,13 @@ All the endpoints (except Utils), are single token protected, ~~the token is ret
 
 The format of the response field is specific to individual endpoints, and can be found with their corresponding documentation.
 
+---
+---
 ### Offers
 
-API endpoint corresponding to job offers
+API endpoints corresponding to job offers.
 
+---
 #### `/v1/offers`
 **GET** :: Retrieves all offers corresponding to the user's `group_id`
 
@@ -102,7 +105,7 @@ API endpoint corresponding to job offers
 }
 ```
 
-Response Format:
+##### Response Format:
 
 ```graphql
 {
@@ -140,7 +143,7 @@ XXX - returns an array called `top_city_names` generated with cities.map(x => x.
 
 ##### Response Format:
 
-    XXX - returns an array called `top_category_names` generated with categories.map(x => x._id)
+XXX - returns an array called `top_category_names` generated with categories.map(x => x._id)
 
 ```graphql
 [String]
@@ -154,7 +157,7 @@ XXX - returns an array called `top_city_names` generated with cities.map(x => x.
 
 ##### Response Format:
 
-    XXX - returns an array called `top_level_names` generated with levels.map(x => x._id)
+XXX - returns an array called `top_level_names` generated with levels.map(x => x._id)
 
 ```graphql
 [String]
@@ -369,7 +372,8 @@ XXX ask Andriy for difference
 ]
 ```
 
-
+---
+---
 ### Companies
 - `/v1/companies`
 - `/v1/companies/{group_id}`
@@ -383,6 +387,8 @@ XXX ask Andriy for difference
 - `/v1/company/{company_id}/email`
 - `/v1/company/{company_id}/faqnotificationemail`
 
+---
+---
 ### Applications
 - `/{offer_id}/applications/new`
 - `/applications/new`
@@ -391,6 +397,8 @@ XXX ask Andriy for difference
 - `/application/offer/{offer_id}`
 - `/application/reply/{application_id}`
 
+---
+---
 ### Utils
 
 ####  `/v1/ping` 
