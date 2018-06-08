@@ -80,6 +80,7 @@ API endpoint corresponding to job offers
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - invalid `offer_id`
 
 **POST** :: Retrieves the offers for the user's `group_id`
@@ -115,6 +116,7 @@ Response Format:
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Invalid question format
     - Unhandled user model error
     - Unhandled offer model error
@@ -191,6 +193,7 @@ XXX - returns an array called `top_city_names` generated with cities.map(x => x.
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Unhandled offer model error
 
 
@@ -218,6 +221,7 @@ DEPRECATED
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Unhandled user model error
     - Unhandled offer model error
 
@@ -240,6 +244,7 @@ DEPRECATED
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Unhandled user model error
     - Unhandled offer model error
 
@@ -262,6 +267,7 @@ DEPRECATED
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Unhandled user model error
     - Unhandled offer model error
 
@@ -287,6 +293,7 @@ Offer is resolved from the `offer_id` provided in the url
 ##### Error Modes:
 
 `formatNotallowed`:
+
     - Unhandled offer model error
 
 
@@ -309,6 +316,7 @@ Offer is resolved from the `offer_id` provided in the url
 ##### Error Modes:
 
 `ko_status`:
+
     - Error on fullResync
 
 
