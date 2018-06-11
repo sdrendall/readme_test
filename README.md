@@ -541,6 +541,7 @@ XXX - level data type
 
 ##### Response Format:
 ```graphql
+{
     group_id: String
     offer_id: String
     status: Boolean
@@ -566,7 +567,7 @@ XXX - level data type
     applications: {}
     applications_count: Number
     is_multiple: Number
-
+}
 ```
 
 XXX - applications data type
@@ -814,7 +815,7 @@ Endpoints for job applications
 
 ##### Response Format:
 ```graphql
-[APDOC]
+[Application]
 ```
 
 ##### Error Modes:
@@ -830,7 +831,9 @@ Endpoints for job applications
 
 ##### Response Format:
 ```graphql
+{
     application: Application
+}
 ```
 
 ---
@@ -846,7 +849,7 @@ Endpoints for job applications
 #### `/v1/memory`
 **GET** :: ????
 
-## Updating to the docs
+## Updating the docs
 
 ### Template
 
