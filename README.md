@@ -645,6 +645,7 @@ Error Modes:
 ```
 
 ##### Response Format:
+```graphql
 {
     name: ?String
     social_1: ?String
@@ -652,6 +653,7 @@ Error Modes:
     social_3: ?String
     description: ?String
 }
+```
 
 Error Modes:
 
@@ -721,16 +723,16 @@ Endpoints for job applications
 ---
 #### Index
 
-- [`/applications/new`](#applicationsnew)
-- [`/{offer_id}/applications/new`](#offer_idapplicationsnew)
-- [`/applications/replied`](#applicationsreplied)
-- [`/{offer_id}/applications/replied`](#offer_idapplicationsreplied)
-- [`/application/offer/{offer_id}`](#applicationofferoffer_id)
-- [`/application/reply/{application_id}`](#applicationreplyapplication_id)
-- [`application/{application_id}`](#applicationapplication_id)
+- [`/v1/applications/new`](#v1applicationsnew)
+- [`/v1/{offer_id}/applications/new`](#v1offer_idapplicationsnew)
+- [`/v1/applications/replied`](#v1applicationsreplied)
+- [`/v1/{offer_id}/applications/replied`](#v1offer_idapplicationsreplied)
+- [`/v1/application/offer/{offer_id}`](#v1applicationofferoffer_id)
+- [`/v1/application/reply/{application_id}`](#v1applicationreplyapplication_id)
+- [`/v1/application/{application_id}`](#v1applicationapplication_id)
 
 ---
-#### `/applications/new`
+#### `/v1/applications/new`
 
 **GET** :: Retrieves all of the new applications for the current user.
 
@@ -752,7 +754,7 @@ Endpoints for job applications
 
 
 ---
-#### `/{offer_id}/applications/new`
+#### `/v1/{offer_id}/applications/new`
 
 **GET** :: Retrieves all of the new applications for the current user corresponding to a specific `offer_id`. Considered for deprecation.
 
@@ -773,7 +775,7 @@ Endpoints for job applications
 - Unhandled company model error
 
 ---
-#### `/applications/replied`
+#### `/v1/applications/replied`
 
 **GET** :: Retrieves all applications for the current user that have been replied to.
 
@@ -795,7 +797,7 @@ Endpoints for job applications
 
 
 ---
-#### `/{offer_id}/applications/replied`
+#### `/v1/{offer_id}/applications/replied`
 
 **GET** :: Retrieves all applications for the current user and corresponding `offer_id` that have been replied to. Considered for deprecation.
 
@@ -817,7 +819,7 @@ Endpoints for job applications
 
 
 ---
-#### `/application/offer/{offer_id}`
+#### `/v1/application/offer/{offer_id}`
 
 **POST** :: Creates an application for the offer corresponding to `offer_id`
 
@@ -846,15 +848,15 @@ Endpoints for job applications
         filename: String
     }
     custom_integration: String
-    q1
-    q2
-    q3
+    q1: String
+    q2: String
+    q3: String
 }
 ```
 
 
 ---
-#### `/application/reply/{application_id}`
+#### `/v1/application/reply/{application_id}`
 
 **GET** :: Sets the replied status of the application specified by `application_id` to `true`
 
@@ -870,7 +872,7 @@ Endpoints for job applications
 - Unhandled application model error
 
 ---
-#### `application/{application_id}`
+#### `/v1/application/{application_id}`
 
 **GET** :: Retrieves the application specified by `application_id` 
 
