@@ -901,7 +901,7 @@ Endpoints for job applications
 ### Creating a new endpoint
 
 1. Add documentation for the endpoint to this readme under the appropriate section (offers, companies, applications etc.). See the [template](#template) for the proper formatting.
-2. Add a link to the section's index. To create a link to the endpoint header, remove all non-alphanumeric characters other than underscores and dashes, and lowercase the header. For example, for a header that looks like this:
+2. Add a link to the section's index. To create a link to the endpoint header, remove all non-alphanumeric characters other than underscores and dashes, and lowercase the whole thing. For example, for a header that looks like this:
 ```markdown
 #### `/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`
 ```
@@ -909,8 +909,9 @@ The link code would look like this:
 ```
 [`/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`](#v1somestupidheaderwith-lotsof_annoyingcharacters.jpg)
 ```
+And it works like this:
 
-[`/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`](#v1somestupidheaderwith-lotsof_annoyingcharacters.jpg)
+[`/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`](#v1somestupidheaderwith-lotsof_annoyingcharactersjpg)
 
 #### `/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`
 
