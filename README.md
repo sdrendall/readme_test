@@ -898,9 +898,27 @@ Endpoints for job applications
 
 ## Updating the docs
 
+### Creating a new endpoint
+
+1. Add documentation for the endpoint to this readme under the appropriate section (offers, companies, applications etc.). See the [template](#template) for the proper formatting.
+2. Add a link to the section's index. To create a link to the endpoint header, remove all non-alphanumeric characters other than underscores and dashes, and lowercase the header. For example, for a header that looks like this:
+```markdown
+#### `/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`
+```
+The link code would look like this:
+```
+[`/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`](#v1somestupidheaderwith-lotsof_annoyingcharacters.jpg)
+```
+
+[`/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`](#v1somestupidheaderwith-lotsof_annoyingcharacters.jpg)
+
+#### `/v1/some/stupidHeader/with-lots/{of_annoying}/characters.jpg`
+
 ### Template
 
 Here is a template to use for new endpoints. Replace the filler data with the info appropriate for your endpoint. I'm using graphql syntax so that type annotations have nice highlighting. Check their [docs](https://graphql.org/learn/schema/) for a reference on standard types and syntax.
+
+**Note:** Creating a markdown code block in markdown is tricky... i had to indent this to make it format properly. please remove the indent before using this template
 
 ```markdown
 
