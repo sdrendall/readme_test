@@ -6,6 +6,7 @@
 	- [Companies](#companies)
 	- [Applications](#applications)
 	- [Utils](#utils)
+3. [Updating the Docs](#updating-the-docs)
 
 ## Installation:
 Make sure you have installed the general dev dependencies TODO LINK
@@ -48,6 +49,27 @@ The format of the response field is specific to individual endpoints, and can be
 ### Offers
 
 API endpoints corresponding to job offers.
+
+---
+#### Index
+
+- [`/v1/offers`](#v1offers)
+- [`/v1/offers/{offer_id}`](#v1offersoffer_id)
+- [`/v1/offers/suggestions/cities`](#v1offerssuggestionscities)
+- [`/v1/offers/suggestions/categories`](#v1offerssuggestionscategories)
+- [`/v1/offers/suggestions/levels`](#v1offerssuggestionslevels)
+- [`/v1/offers/options`](#v1offersoptions)
+- [`/v1/offers/external_for_company`](#v1offersexternal_for_company)
+- [`/v1/offers/disabled`](#v1offersdisabled)
+- [`/v1/disable/{offer_id}`](#v1disableoffer_id)
+- [`/v1/enable/{offer_id}`](#v1enableoffer_id)
+- [`/v1/elastic/single/{offer_id}`](#v1elasticsingleoffer_id)
+- [`/v1/elastic/syncall`](#v1elasticsyncall)
+- [`/v1/elastic/search`](#v1elasticsearch)
+- [`/v1/fboffers`](#v1fboffers)
+- [`/v1/offersuggestions`](#v1offersuggestions)
+- [`/v1/offercategorysuggestions`](#v1offercategorysuggestions)
+
 
 ---
 #### `/v1/offers`
@@ -378,6 +400,19 @@ XXX ask Andriy for difference
 Endpoints for company data
 
 ---
+#### Index
+
+- [`/v1/companies`](#v1companies)
+- [`/v1/companies/{group_id}`](#v1companiesgroup_id)
+- [`/v1/companies/{group_id}/invite-users`](#v1companiesgroup_idinvite-users)
+- [`/v1/company/{group_id}/applications`](#v1companygroup_idapplications)
+- [`/v1/company/{group_id}/offers`](#v1companygroup_idoffers)
+- [`/v1/company/{group_id}`](#v1companygroup_id)
+- [`/v1/company/{group_id}/{offer_id}`](#v1companygroup_idoffer_id)
+- [`/v1/company/{group_id}/email`](#v1companygroup_idemail)
+- [`/v1/company/{company_id}/faqnotificationemail`](#v1companycompany_idfaqnotificationemail)
+
+---
 #### `/v1/companies`
 
 **GET** :: retrieve paginated company data
@@ -683,6 +718,16 @@ Error Modes:
 
 Endpoints for job applications
 
+---
+#### Index
+
+- [`/applications/new`](#applicationsnew)
+- [`/{offer_id}/applications/new`](#offer_idapplicationsnew)
+- [`/applications/replied`](#applicationsreplied)
+- [`/{offer_id}/applications/replied`](#offer_idapplicationsreplied)
+- [`/application/offer/{offer_id}`](#applicationofferoffer_id)
+- [`/application/reply/{application_id}`](#applicationreplyapplication_id)
+- [`application/{application_id}`](#applicationapplication_id)
 
 ---
 #### `/applications/new`
