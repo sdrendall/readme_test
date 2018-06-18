@@ -27,9 +27,9 @@ Finally, install the dependencies listed in `requirements.txt`:
 pip install -r requirements.txt
 ```
 
-You can test your build with the following:
+You can test your build with `pytest`:
 ```
-python -m unittest discover -s . -p '*_test.py'
+pytest
 ```
 
 ## API Docs
