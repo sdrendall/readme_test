@@ -36,7 +36,7 @@ npm run test
 ## Endpoints
 All endpoints (except Utils), are single token protected. Each endpoint returns JSON of the following form:
 
-```graphql
+```js
 {
 	status: {
 		value: StatusCode
@@ -84,7 +84,7 @@ API endpoints corresponding to job offers.
 
 ##### Response format:
     
-```graphql
+```js
 {
     total_active: Int
     total_disabled: Int
@@ -101,7 +101,7 @@ API endpoints corresponding to job offers.
 
 (response is an array, NOT an object)
 
-```graphql
+```js
 [Offer]
 ```
 
@@ -115,7 +115,7 @@ API endpoints corresponding to job offers.
 
 ##### Request Body Format:
 
-```graphql
+```js
 {
     offer: {
 	    level
@@ -135,7 +135,7 @@ API endpoints corresponding to job offers.
 
 ##### Response Format:
 
-```graphql
+```js
 {
     offer: Offer
 }
@@ -157,7 +157,7 @@ API endpoints corresponding to job offers.
 
 ##### Response Format:
 
-```graphql
+```js
 [String]
 ```
 
@@ -169,7 +169,7 @@ API endpoints corresponding to job offers.
 
 ##### Response Format:
 
-```graphql
+```js
 [String]
 ```
 
@@ -181,7 +181,7 @@ API endpoints corresponding to job offers.
 
 ##### Response Format:
 
-```graphql
+```js
 [String]
 ```
 
@@ -193,7 +193,7 @@ API endpoints corresponding to job offers.
 
 ##### Response Format:
 
-```graphql
+```js
 {
     cities: [{
         name: String
@@ -232,7 +232,7 @@ DEPRECATED
 
 ##### Response Format:
 
-```graphql
+```js
 {
     total_active: Int
     total_disabled: Int
@@ -255,7 +255,7 @@ DEPRECATED
 
 ##### Response Format:
 
-```graphql
+```js
 {
     total_active: Int
     total_disabled: Int
@@ -278,7 +278,7 @@ DEPRECATED
 
 ##### Response Format:
 
-```graphql
+```js
 {
     total_active: Int
     total_disabled: Int
@@ -303,12 +303,12 @@ DEPRECATED
 
 Offer is resolved from the `offer_id` provided in the url
 
-```graphql
+```js
 {}
 ```
 
 ##### Response Format:
-```graphql
+```js
 [ElasticSearchResponse]
 ```
 
@@ -326,12 +326,12 @@ Offer is resolved from the `offer_id` provided in the url
 
 ##### Request Body Format:
 
-```graphql
+```js
 {}
 ```
 
 ##### Response Format:
-```graphql
+```js
 []
 ```
 
@@ -348,7 +348,7 @@ Offer is resolved from the `offer_id` provided in the url
 **GET** :: Gets a list of offer search results
 
 ##### Response Format:
-```graphql
+```js
 [OfferID]
 ```
 
@@ -356,18 +356,21 @@ Offer is resolved from the `offer_id` provided in the url
 ---
 #### `/v1/fboffers`
 
-XXX - not sure what this does
+**GET** :: Returns offers based on the query filter (query same as above for "Top x")
+
+##### Response Format:
+```js
+[OfferID]
+```
 
 
 ---
 #### `/v1/offersuggestions`
 
-**GET** :: Retrieves cities containing the most offers and the offer categories found in those cities
-
-XXX - not sure how this differs from offercategorysuggestions
+**GET** :: Retrieves cities containing the most offers and the offer title tokens (eg. `["frontend", "developer"]`) found in those cities
 
 ##### Response Format:
-```graphql
+```js
 [
     {
         city: City
@@ -380,12 +383,10 @@ XXX - not sure how this differs from offercategorysuggestions
 ---
 #### `/v1/offercategorysuggestions`
 
-**GET** :: Similar to offersuggestions
-
-XXX - ask Andriy for difference
+**GET** :: Retrieves cities containing the most offers and the offer categories found in those cities
 
 ##### Response Format:
-```graphql
+```js
 [
     {
         city: City
@@ -419,7 +420,7 @@ Endpoints for company data
 **GET** :: retrieve paginated company data
 
 ##### Response Format:
-```graphql
+```js
 [Company]
 ```
 
@@ -435,9 +436,7 @@ Note: a next link is returned when a page of company data is returned that does 
 
 ##### Request Body Format:
 
-XXX - There are many company fields that are not used in updateCompany. Are they ignored?
-
-```graphql
+```js
 {
     name: ?String
     social_1: ?String
@@ -453,7 +452,7 @@ XXX - There are many company fields that are not used in updateCompany. Are they
 ```
 
 ##### Response Format:
-```graphql
+```js
 {
     name: ?String
     social_1: ?String
@@ -483,7 +482,7 @@ XXX - There are many company fields that are not used in updateCompany. Are they
 **DELETE** :: Deletes the company specified by `group_id`. All documents corresponding to `group_id` are dropped from the following models: `company`, `user`, `offer`, `applicant`, `application`
 
 ##### Response Format:
-```graphql
+```js
 ''
 ```
 
@@ -500,14 +499,14 @@ XXX - There are many company fields that are not used in updateCompany. Are they
 **POST** :: Creates users for the specified `group_id` and sends out invitation links.
 
 ##### Request Body Format:
-```graphql
+```js
 {
     emails: [String]
 }
 ```
 
 ##### Response Format:
-```graphql
+```js
 {
     data: [User || "ko_email_exists"]
 }
@@ -526,7 +525,7 @@ XXX - There are many company fields that are not used in updateCompany. Are they
 **GET** :: Retrieves the applications corresponding to a specific `group_id`.
 
 ##### Response Format:
-```graphql
+```js
 {
     applications: [Application]
 }
@@ -543,7 +542,7 @@ XXX - There are many company fields that are not used in updateCompany. Are they
 **GET** :: Retrieves the offers corresponding to a specific `group_id`
 
 ##### Response Format:
-```graphql
+```js
 [Offer]
 ```
 
@@ -552,7 +551,7 @@ Note: A next link is provided if pagination is used.
 **POST** :: Saves a set of offers for a given company
 
 ##### Request Body Format:
-```graphql
+```js
 {
     _id: !OfferID
     group_id: !CompanyID
@@ -567,14 +566,14 @@ Note: A next link is provided if pagination is used.
     unit: String
     type: String
     link: String
-    level: String
+    level: [String]
     category: String
     status: ?Boolean
 }
 ```
 
 ##### Response Format:
-```graphql
+```js
 {
     group_id: String
     offer_id: String
@@ -598,13 +597,10 @@ Note: A next link is provided if pagination is used.
     link: String
     created: DateTime
     updated: DateTime
-    applications: {}
     applications_count: Number
     is_multiple: Number
 }
 ```
-
-XXX - applications data type
 
 Error Modes:
 
@@ -620,7 +616,7 @@ Error Modes:
 **GET** :: Retrieves the company specified by `group_id`
 
 ##### Response Format:
-```graphql
+```js
 [Company]
 ```
 
@@ -633,7 +629,7 @@ Error Modes:
 **POST** :: Updates the company corresponding to `group_id`
 
 ##### Request Body Format:
-```graphql
+```js
 {
     name: ?String
     social_1: ?String
@@ -644,7 +640,7 @@ Error Modes:
 ```
 
 ##### Response Format:
-```graphql
+```js
 {
     name: ?String
     social_1: ?String
@@ -668,7 +664,7 @@ Error Modes:
 **GET** :: Retrieves the offer corresponding to `group_id` and `offer_id`
 
 ##### Response Format:
-```graphql
+```js
 [Offer]
 ```
 
@@ -687,7 +683,7 @@ Error Modes:
 **POST** :: Sends a notification email to each user at the company corresponding to `group_id`
 
 ##### Request Body Format:
-```graphql
+```js
 {
     subject: String!
     message: String!
@@ -695,7 +691,7 @@ Error Modes:
 ```
 
 ##### Response Format:
-```graphql
+```js
 ''
 ```
 
@@ -736,7 +732,7 @@ Endpoints for job applications
 **GET** :: Retrieves all of the new applications for the current user.
 
 ##### Response Format:
-```graphql
+```js
 {
     total_new: Integer
     total_replied: Integer
@@ -758,7 +754,7 @@ Endpoints for job applications
 **GET** :: Retrieves all of the new applications for the current user corresponding to a specific `offer_id`. Considered for deprecation.
 
 ##### Response Format:
-```graphql
+```js
 {
     total_new: Integer
     total_replied: Integer
@@ -779,7 +775,7 @@ Endpoints for job applications
 **GET** :: Retrieves all applications for the current user that have been replied to.
 
 ##### Response Format:
-```graphql
+```js
 {
     total_new: Integer
     total_replied: Integer
@@ -801,7 +797,7 @@ Endpoints for job applications
 **GET** :: Retrieves all applications for the current user and corresponding `offer_id` that have been replied to. Considered for deprecation.
 
 ##### Response Format:
-```graphql
+```js
 {
     total_new: Integer
     total_replied: Integer
@@ -823,7 +819,7 @@ Endpoints for job applications
 **POST** :: Creates an application for the offer corresponding to `offer_id`
 
 ##### Request Body Format:
-```graphql
+```js
 {
     applicant: {
         first_name: String!
@@ -860,7 +856,7 @@ Endpoints for job applications
 **GET** :: Sets the replied status of the application specified by `application_id` to `true`
 
 ##### Response Format:
-```graphql
+```js
 [Application]
 ```
 
@@ -876,7 +872,7 @@ Endpoints for job applications
 **GET** :: Retrieves the application specified by `application_id` 
 
 ##### Response Format:
-```graphql
+```js
 {
     application: Application
 }
@@ -916,9 +912,9 @@ And it works like this:
 
 ### Template
 
-Here is a template to use for new endpoints. Replace the filler data with the info appropriate for your endpoint. I'm using graphql syntax so that type annotations have nice highlighting. Check their [docs](https://graphql.org/learn/schema/) for a reference on standard types and syntax.
+Here is a template to use for new endpoints. Replace the filler data with the info appropriate for your endpoint.
 
-**Note:** Creating a markdown code block in markdown is tricky... i had to indent this to make it format properly. please remove the indent before using this template
+**Note:** Creating a markdown code block in markdown is tricky... I had to indent this to make it format properly. please remove the indent before using this template
 
 ```markdown
 
@@ -928,7 +924,7 @@ Here is a template to use for new endpoints. Replace the filler data with the in
     **GET** :: <brief description of behavior>
 
     ##### Response Format:
-    ```graphql
+    ```js
     {
         user: {
             name: String
@@ -949,13 +945,17 @@ Here is a template to use for new endpoints. Replace the filler data with the in
 
     ##### Request Body Format:
 
-    ```graphql
-    {}
+    ```js
+    {
+        
+    }
     ```
 
     ##### Response Format:
-    ```graphql
-    {}
+    ```js
+    {
+        
+    }
     ```
 
     ##### Error Modes:
