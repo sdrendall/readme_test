@@ -3,6 +3,7 @@
 2. [API Docs](#api-docs)	
     - [Human Readable](#human-readable)
     - [Machine Readable](#machine-readable)
+    - [Editing the Docs](#editing-the-docs)
 3. [Author's Note](#authors-note)
 
 ## Installation 
